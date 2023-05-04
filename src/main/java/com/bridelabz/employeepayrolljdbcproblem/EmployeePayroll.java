@@ -1,9 +1,11 @@
 package com.bridelabz.employeepayrolljdbcproblem;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 public class EmployeePayroll extends Base {
 
@@ -49,6 +51,7 @@ public class EmployeePayroll extends Base {
 		preparedStatement.executeUpdate();
 		System.out.println("Record updated successfully");
 	}
+
 	public void updateWithPreparedStementEmployeePayrollData() throws SQLException {
 		connection = setUpDatabase();
 		String updateQuery = "update employee_payroll set salary = ? WHERE name = ?";
@@ -57,5 +60,36 @@ public class EmployeePayroll extends Base {
 		preparedStatement.setString(2, "Terrisa");
 		preparedStatement.executeUpdate();
 		System.out.println("Record updated successfully");
-}
-}
+	}
+
+	public static void getEmployeesByJoiningDateRange(LocalDate startDate, LocalDate endDate) throws SQLException {
+		connection = setUpDatabase();
+		String query = "SELECT * FROM employee_payroll WHERE start BETWEEN ? AND ?";
+		PreparedStatement preparedStatement = connection.prepareStatement(query);
+		preparedStatement.setDate(1, Date.valueOf(startDate));
+		preparedStatement.setDate(2, Date.valueOf(endDate));
+		ResultSet resultSet = preparedStatement.executeQuery();
+		while (resultSet.next()) {
+			int id = resultSet.getInt(1);
+
+			LocalDate start = resultSet.getDate(8).toLocalDate();
+			System.out.println(start);
+		}
+	}
+		public void employeePayrollByGender() throws SQLException {
+		    connection = setUpDatabase();
+		    String query = "SELECT gender, SUM(salary), AVG(salary), MIN(salary), MAX(salary), COUNT(*) FROM employee_payroll GROUP BY gender";
+		    Statement statement = connection.createStatement();
+		    ResultSet resultSet = statement.executeQuery(query);
+		    while (resultSet.next()) {
+		        String gender = resultSet.getString(1);
+		        double sumSalary = resultSet.getDouble(2);
+		        double avgSalary = resultSet.getDouble(3);
+		        double minSalary = resultSet.getDouble(4);
+		        double maxSalary = resultSet.getDouble(5);
+		        int count = resultSet.getInt(6);
+		        System.out.println(gender + " " + sumSalary + " " + avgSalary + " " + minSalary + " " + maxSalary + " " + count);
+		    }
+		}
+	}
+

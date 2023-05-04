@@ -4,9 +4,10 @@ import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Enumeration;
 
-public class Base { 
+public class Base {
 
 	public static Connection connection;
 
@@ -20,7 +21,10 @@ public class Base {
 		employeePayroll.insertEmployeePayrollData();
 		employeePayroll.updateEmployeePayrollData();
 		employeePayroll.updateWithPreparedStementEmployeePayrollData();
-		
+		LocalDate startDate = LocalDate.of(2021, 1, 1);
+		LocalDate endDate = LocalDate.of(2022, 12, 31);
+		EmployeePayroll.getEmployeesByJoiningDateRange(startDate, endDate);
+		employeePayroll.employeePayrollByGender();
 	}
 
 	public static Connection setUpDatabase() {
