@@ -1,11 +1,12 @@
 package com.bridelabz.employeepayrolljdbcproblem;
+
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Enumeration;
 
-public class Base {
+public class Base { 
 
 	public static Connection connection;
 
@@ -13,8 +14,9 @@ public class Base {
 
 		listOfDrivers();
 		setUpDatabase();
-		
-	
+		EmployeePayroll employeePayroll = new EmployeePayroll();
+
+		employeePayroll.retrieveEmployeePayrollData();
 	}
 
 	public static Connection setUpDatabase() {
