@@ -49,5 +49,13 @@ public class EmployeePayroll extends Base {
 		preparedStatement.executeUpdate();
 		System.out.println("Record updated successfully");
 	}
-
+	public void updateWithPreparedStementEmployeePayrollData() throws SQLException {
+		connection = setUpDatabase();
+		String updateQuery = "update employee_payroll set salary = ? WHERE name = ?";
+		PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
+		preparedStatement.setDouble(1, 3000000.00);
+		preparedStatement.setString(2, "Terrisa");
+		preparedStatement.executeUpdate();
+		System.out.println("Record updated successfully");
+}
 }

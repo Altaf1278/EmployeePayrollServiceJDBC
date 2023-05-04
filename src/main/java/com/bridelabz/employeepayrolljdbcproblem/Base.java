@@ -19,6 +19,8 @@ public class Base {
 		employeePayroll.retrieveEmployeePayrollData();
 		employeePayroll.insertEmployeePayrollData();
 		employeePayroll.updateEmployeePayrollData();
+		employeePayroll.updateWithPreparedStementEmployeePayrollData();
+		
 	}
 
 	public static Connection setUpDatabase() {
