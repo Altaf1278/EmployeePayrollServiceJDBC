@@ -17,6 +17,8 @@ public class Base {
 		EmployeePayroll employeePayroll = new EmployeePayroll();
 
 		employeePayroll.retrieveEmployeePayrollData();
+		employeePayroll.insertEmployeePayrollData();
+		employeePayroll.updateEmployeePayrollData();
 	}
 
 	public static Connection setUpDatabase() {
